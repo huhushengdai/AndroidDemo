@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/payed_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="title"
+        android:textSize="16sp" />
+
+    <include
+        android:id="@+id/payed_trip_over_info"
+        layout="@layout/layout_trip_over_info" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/c4" />
+
+
+    <ScrollView
+        android:id="@+id/payed_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:id="@+id/payed_scroll_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <!--支付信息-->
+            <include
+                android:id="@+id/payed_pay_info"
+                layout="@layout/layout_pay_info" />
+            <!--评价乘客-->
+            <include
+                android:id="@+id/payed_evaluate_passenger"
+                layout="@layout/layout_evaluate_passenger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/payed_pay_info"/>
+            <com.windy.anim.widget.LineWrapViewGroup
+                android:id="@+id/payed_after_evaluate_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                android:layout_below="@id/payed_evaluate_passenger"/>
+            <include
+                android:id="@+id/evaluate_content_container"
+                layout="@layout/layout_evaluate_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@id/payed_after_evaluate_label"
+                />
+
+            <ImageView
+                android:id="@+id/payed_index_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_index"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/evaluate_content_container"
+                android:padding="8dp"
+                />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</LinearLayout>

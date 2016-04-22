@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><!--评价乘客-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/c4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:text="匿名评价乘客"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <!--评分-->
+    <RatingBar
+        android:id="@+id/evaluate_grade_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:isIndicator="true"
+        android:minHeight="31dp"
+        android:progressDrawable="@drawable/rating_bar_evaluate"
+        android:rating="0" />
+
+    <com.windy.anim.widget.LineWrapViewGroup
+        android:id="@+id/evaluate_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/evaluate_message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="留言"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/evaluate_message_edit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_circle"
+        android:gravity="start"
+        android:hint="我还有其他话说"
+        android:padding="5dp"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/evaluate_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/slt_btn_green_gray"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="提交匿名评价"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>

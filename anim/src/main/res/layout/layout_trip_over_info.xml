@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:id="@+id/trip_over_info_container">
+
+    <TextView
+        android:id="@+id/trip_over_start_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="开始位置"
+        android:drawableLeft="@mipmap/route_start"
+        android:drawablePadding="4dp"/>
+
+    <TextView
+        android:id="@+id/trip_over_end_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trip_over_start_address"
+        android:layout_marginTop="4dp"
+        android:text="结束位置"
+        android:drawableLeft="@mipmap/route_end"
+        android:drawablePadding="4dp"/>
+
+    <ImageView
+        android:id="@+id/trip_over_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/icon_phone" />
+</RelativeLayout>
