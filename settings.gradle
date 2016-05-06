@@ -1,1 +1,1 @@
-include ':bluetooth', ':im', ':tab', ':tool', ':ptr', ':nfctest', ':camera', ':viewpagecycle', ':surface', ':gamebird', ':anim'
+include ':bluetooth', ':im', ':tab', ':tool', ':ptr', ':nfctest', ':camera', ':viewpagecycle', ':surface', ':gamebird', ':anim', ':wheel', ':pop'

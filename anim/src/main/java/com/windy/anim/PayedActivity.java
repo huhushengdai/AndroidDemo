@@ -148,7 +148,7 @@ public class PayedActivity extends BaseActivity implements View.OnClickListener 
         mScrollContainer.setLayoutParams(params);
     }
 
-    private void initView() {
+    protected void initView() {
         mEvaGradeRating.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

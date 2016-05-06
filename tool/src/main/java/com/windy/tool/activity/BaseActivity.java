@@ -16,9 +16,25 @@ public class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         ViewUtils.inject(this);
         init();
+        down();
     }
 
+
+
     protected void init() {
+        initView();
+        initData();
+    }
+
+    private void initData() {
+
+    }
+
+    protected void initView() {
+
+    }
+
+    protected void down() {
 
     }
 }

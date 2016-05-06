@@ -1,35 +1,30 @@
 package com.windy.tool.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * author: wang
- * time: 2015/7/24
- * description:
+ * Author: wanglizhi
+ * Description:
+ * Date: 2016/5/4
  */
-public abstract class AppBaseAdapter<T> extends BaseAdapter{
-    protected ArrayList<T> data;
-    protected Context context;
-    protected LayoutInflater inflater;
+public abstract class AppBaseAdapter<T> extends BaseAdapter {
 
-    public AppBaseAdapter(ArrayList<T> data, Context context) {
-        this.data = data;
-        this.context = context;
-        this.inflater = LayoutInflater.from(context);
-    }
+    protected Context mContext;
+    protected List<T> mData;
 
     @Override
     public int getCount() {
-        return data!=null&&!data.isEmpty()?data.size():0;
+        return mData == null ? 0 : mData.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return data!=null&&!data.isEmpty()?data.get(position):null;
+        return mData == null ? null : mData.get(position);
     }
 
     @Override
@@ -37,5 +32,20 @@ public abstract class AppBaseAdapter<T> extends BaseAdapter{
         return position;
     }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        BaseViewHolder vh;
+        if (view == null){
+            view = View.inflate(mContext,0,parent);
+            vh = getViewHolder(view);
+            view.setTag(vh);
+        }else {
+            vh = (BaseViewHolder) view.getTag();
+        }
+        vh.initView(position);
+        return view;
+    }
 
+    public abstract BaseViewHolder getViewHolder(View convertView);
 }
