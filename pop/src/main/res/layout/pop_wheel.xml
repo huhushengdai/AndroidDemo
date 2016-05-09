@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/time_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        <!--取消按钮-->
+        <TextView
+            android:id="@+id/pop_wheel_cancel"
+            android:text="取消"
+            style="@style/DialogCheckTimeText"/>
+        <!--确定按钮-->
+        <TextView
+            android:id="@+id/pop_wheel_submit"
+            android:text="确定"
+            android:layout_alignParentRight="true"
+            style="@style/DialogCheckTimeText"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pop_wheel_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -26,7 +26,7 @@ public class BaseActivity extends Activity {
         initData();
     }
 
-    private void initData() {
+    protected void initData() {
 
     }
 

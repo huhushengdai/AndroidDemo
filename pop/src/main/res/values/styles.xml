@@ -13,4 +13,14 @@
         <item name="android:windowEnterAnimation">@anim/anim_pop_base_show</item>
         <item name="android:windowExitAnimation">@anim/anim_pop_base_dismiss</item>
     </style>
+
+    <!--时间选择器确定和取消按钮——text-->
+    <style name="DialogCheckTimeText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/deepGreen</item>
+        <item name="android:clickable">true</item>
+    </style>
 </resources>

@@ -3,7 +3,6 @@ package com.windy.pop.pop;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowManager;
@@ -79,6 +78,7 @@ public class BasePopWindow extends PopupWindow {
         this.setFocusable(true);// 设置弹出窗体可点击
         setAnimationStyle(ANIM_POP);//设置弹出动画
         setClippingEnabled(false);
+
     }
 
     public void setBackgroundShow(Activity activity){

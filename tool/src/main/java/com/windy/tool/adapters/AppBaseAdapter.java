@@ -17,6 +17,11 @@ public abstract class AppBaseAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mData;
 
+    public AppBaseAdapter(Context context, List<T> data) {
+        this.mContext = context;
+        this.mData = data;
+    }
+
     @Override
     public int getCount() {
         return mData == null ? 0 : mData.size();
@@ -32,20 +37,21 @@ public abstract class AppBaseAdapter<T> extends BaseAdapter {
         return position;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        BaseViewHolder vh;
-        if (view == null){
-            view = View.inflate(mContext,0,parent);
-            vh = getViewHolder(view);
-            view.setTag(vh);
-        }else {
-            vh = (BaseViewHolder) view.getTag();
-        }
-        vh.initView(position);
-        return view;
-    }
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        View view = convertView;
+//        BaseViewHolder vh;
+//        if (view == null){
+//            view = View.inflate(mContext,getViewLayout(),parent);
+//            vh = getViewHolder(view);
+//            view.setTag(vh);
+//        }else {
+//            vh = (BaseViewHolder) view.getTag();
+//        }
+//        vh.initView(position);
+//        return view;
+//    }
 
     public abstract BaseViewHolder getViewHolder(View convertView);
+    public abstract int getViewLayout();
 }
