@@ -1,12 +1,9 @@
 package com.windy.pop.pop;
 
-import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.PopupWindow;
 
@@ -21,60 +18,53 @@ import com.windy.tool.inject.ViewUtils;
  * Description:滚动选择器  PopupWindow
  * Date: 2016/5/9
  */
-public class WheelPopupWindow extends PopupWindow implements PopupWindow.OnDismissListener {
+public class WheelPopupWindow extends BasePopWindow{
     private Activity mActivity;
     private BaseAdapter mWheelAdapter;
-
-    public static final int ANIM_POP = R.style.anim_pop_base;//默认显示和隐藏动画
+    //listener
+    private SubmitListener mSubmitListener;//确定监听
+    private CancelListener mCancelListener;//取消监听
     //--------view----------------
-    @ViewInject(R.id.pop_wheel_container)
-    ViewGroup mContainer;//内容父类容器
-    WheelView mWheelView;//选择器View
-    public WheelPopupWindow(Activity activity){
-        mActivity = activity;
-        init();
-    }
+    private WheelView mWheelView;//选择器View
 
-    /**
-     * 初始化PopupWindow
-     */
-    private void init() {
+    public WheelPopupWindow(Activity activity){
+        super();
+        mActivity = activity;
         initView();
     }
 
-    private void initView() {
+    protected void initView() {
         View parent = View.inflate(mActivity,R.layout.pop_wheel,null);
         ViewUtils.inject(this,parent);
 
-        mWheelView = new WheelView(mActivity);
-//        mWheelView.setOnEndFlingListener(mListener);//滑动结束监听
-//        mWheelView.setSoundEffectsEnabled(true);
-        mWheelView.setLayoutParams(new ViewGroup.LayoutParams(-1,-2));
-        mWheelView.setGravity(Gravity.CENTER);
-        setContainer(mWheelView);
+        mWheelView = (WheelView) parent.findViewById(R.id.pop_wheel_view);
+        //确定点击事件
+        parent.findViewById(R.id.pop_wheel_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mSubmitListener!=null){
+                    mSubmitListener.submit(mWheelView.getSelectedItemPosition());
+                }
+                dismiss();
+            }
+        });
+        //取消点击事件
+        parent.findViewById(R.id.pop_wheel_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCancelListener!=null){
+                    mCancelListener.cancel();
+                }
+                dismiss();
+            }
+        });
         setContentView(parent);
 
         setWidth(-1);
         setHeight(-2);
-
-
-        setBackgroundDrawable(new BitmapDrawable());
-        this.setOutsideTouchable(true);// 设置外部可点击
-        this.setFocusable(true);// 设置弹出窗体可点击
-        setAnimationStyle(ANIM_POP);//设置弹出动画
-        setClippingEnabled(false);
-
-        setOnDismissListener(this);
+        setBgAlphaAnim(mActivity);
     }
 
-    /**
-     * 添加内容View
-     * @param childView 内容view
-     */
-    public void setContainer(View childView){
-        mContainer.removeAllViews();
-        mContainer.addView(childView);
-    }
 
     public void setWheelAdapter(BaseAdapter adapter){
         mWheelAdapter = adapter;
@@ -85,56 +75,55 @@ public class WheelPopupWindow extends PopupWindow implements PopupWindow.OnDismi
         return mWheelAdapter;
     }
 
+    /**
+     * 设置WheelView滚动结束接听
+     * @param listener
+     */
     public void setOnEndFlingListener(TosGallery.OnEndFlingListener listener){
         mWheelView.setOnEndFlingListener(listener);
     }
 
-    public void setWheelViewParams(int width,int height){
+    /**
+     * 设置确定监听
+     */
+    public void setSubmitListener(SubmitListener listener){
+        mSubmitListener = listener;
+    }
+    /**
+     * 设置取消监听
+     */
+    public void setCancelListener(CancelListener listener){
+        mCancelListener = listener;
+    }
+
+
+
+    /**
+     * 设置未选中的Item数量
+     * 2的整数倍
+     * @param count 未选中Item数量
+     */
+    public void showUncheckedItemCount(int count){
+        if (mWheelAdapter == null){
+            return;
+        }
+        count = count/2*2;//取2的整数倍
+        View view = mWheelAdapter.getView(0,null,null);
+        view.measure(0,0);
+        int height = view.getMeasuredHeight()*(count+1);
         ViewGroup.LayoutParams params = mWheelView.getLayoutParams();
-        if (width!=0) {
-            params.width = width;
-        }
-        if (height!=0){
-            params.height = height;
-        }
+        params.height = height;
         mWheelView.setLayoutParams(params);
     }
 
-    public void setWheelViewParams(ViewGroup.LayoutParams params){
-        mWheelView.setLayoutParams(params);
+
+
+    //-----------------------------------   interface    -----------------------------
+    interface SubmitListener{
+        public void submit(int position);
     }
 
-    @Override
-    public void showAtLocation(View parent, int gravity, int x, int y) {
-        super.showAtLocation(parent, gravity, x, y);
-        ValueAnimator moveAnim = ValueAnimator.ofFloat(1,0.5f);
-        moveAnim.setTarget(mActivity);
-        moveAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                WindowManager.LayoutParams lp = mActivity.getWindow().getAttributes();
-                lp.alpha= (Float) animation.getAnimatedValue();
-                mActivity.getWindow().setAttributes(lp);
-            }
-        });
-        moveAnim.setDuration(2000);
-        moveAnim.start();
-    }
-
-
-    @Override
-    public void onDismiss() {
-        ValueAnimator moveAnim = ValueAnimator.ofFloat(0.5f,1);
-        moveAnim.setTarget(mActivity);
-        moveAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                WindowManager.LayoutParams lp = mActivity.getWindow().getAttributes();
-                lp.alpha= (Float) animation.getAnimatedValue();
-                mActivity.getWindow().setAttributes(lp);
-            }
-        });
-        moveAnim.setDuration(2000);
-        moveAnim.start();
+    interface CancelListener{
+        public void cancel();
     }
 }

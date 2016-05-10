@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.windy.pop.R;
 import com.windy.pop.utils.Utils;
 import com.windy.pop.widget.TosGallery;
 
@@ -59,6 +60,7 @@ public class TimeWheelAdapter extends BaseAdapter{
         if (view == null) {
             view = new TextView(context);
             view.setLayoutParams(new TosGallery.LayoutParams(mWidth, mHeight));
+            view.setBackgroundResource(R.color.master_color);
             vh = new ViewHolder(view);
             view.setTag(vh);
         }else {

@@ -25,10 +25,10 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/pop_wheel_container"
+    <com.windy.pop.widget.WheelView
+        android:id="@+id/pop_wheel_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"/>
+        />
 
 </LinearLayout>

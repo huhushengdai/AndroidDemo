@@ -37,21 +37,22 @@ public abstract class AppBaseAdapter<T> extends BaseAdapter {
         return position;
     }
 
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        View view = convertView;
-//        BaseViewHolder vh;
-//        if (view == null){
-//            view = View.inflate(mContext,getViewLayout(),parent);
-//            vh = getViewHolder(view);
-//            view.setTag(vh);
-//        }else {
-//            vh = (BaseViewHolder) view.getTag();
-//        }
-//        vh.initView(position);
-//        return view;
-//    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = convertView;
+        BaseViewHolder vh;
+        if (view == null){
+            view = View.inflate(mContext,getViewLayout(),null);
+            vh = getViewHolder(view);
+            view.setTag(vh);
+        }else {
+            vh = (BaseViewHolder) view.getTag();
+        }
+        initView(vh,position);
+        return view;
+    }
 
     public abstract BaseViewHolder getViewHolder(View convertView);
     public abstract int getViewLayout();
+    public abstract void initView(BaseViewHolder vh,int position);
 }

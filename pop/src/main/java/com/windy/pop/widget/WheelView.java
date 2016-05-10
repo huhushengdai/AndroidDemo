@@ -186,4 +186,12 @@ public class WheelView extends TosGallery {
         mBottomShadow.setBounds(0, getHeight() - height, getWidth(), getHeight());
         mBottomShadow.draw(canvas);
     }
+
+    /**
+     * 设备选中背景
+     * @param selectorDrawable 选中项的背景
+     */
+    public void setSelectorDrawable(Drawable selectorDrawable){
+        mSelectorDrawable = selectorDrawable;
+    }
 }

@@ -15,5 +15,5 @@ public abstract class BaseViewHolder {
         ViewUtils.inject(this,convertView);
     }
 
-    public abstract void initView(int position);
+
 }
