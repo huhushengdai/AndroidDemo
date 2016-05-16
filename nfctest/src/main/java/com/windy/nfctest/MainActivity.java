@@ -16,9 +16,11 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.windy.nfctest.bean.CardByteArray;
 import com.windy.nfctest.utils.CardManager;
 import com.windy.nfctest.utils.ConvertManager;
+import com.windy.tool.activity.BaseActivity;
+import com.windy.tool.inject.ContentView;
 
-
-public class MainActivity extends ActionBarActivity {
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity{
     public static final String TAG = "MainActivity";
 
     //-----view
@@ -30,15 +32,9 @@ public class MainActivity extends ActionBarActivity {
 
     private NfcAdapter nfcAdapter;//Nfc适配器
     private PendingIntent pendingIntent;//作用：当扫描到IC卡后跳转
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ViewUtils.inject(this);
-        init();
-    }
 
-    private void init() {
+    @Override
+    protected void init() {
         initNfc();
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
                 getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);

@@ -35,7 +35,7 @@ public class WheelPopupWindow extends BasePopWindow{
 
     protected void initView() {
         View parent = View.inflate(mActivity,R.layout.pop_wheel,null);
-        ViewUtils.inject(this,parent);
+//        ViewUtils.inject(this,parent);
 
         mWheelView = (WheelView) parent.findViewById(R.id.pop_wheel_view);
         //确定点击事件
